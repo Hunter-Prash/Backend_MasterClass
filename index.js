@@ -19,20 +19,6 @@ async function main() {
   // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
 }
 
-// ex Schema is like a configuration for every document in a collection
-const productSchema = new Schema({
-  title: String,
-  description: String,
-  price: Number,
-  discountPercentage: Number,
-  rating: Number,
-  brand: String,
-  category: String,
-  thumbnail: String,
-  images: [String]
-});
-
-
 
 
 const bodyParser=require('body-parser');

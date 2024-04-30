@@ -4,6 +4,10 @@ const index=fs.readFileSync('index.html','utf-8')
 const data=JSON.parse(fs.readFileSync('data.json','utf-8'));
 const products=data.products;
 
+const model=require('../model/product')
+const Product=model.Product;
+
+
 //READ OPERATION
 exports.getAllProd=(req,res)=>{
     res.json(products)
@@ -16,7 +20,7 @@ exports.getAllProd=(req,res)=>{
     res.json(product);
   }
 
-//POST operation
+//POST operation using simple nide+express
 exports. createProduct=(req,res)=>{
     //The data will come from the front end in JSOn or url encoded format
   
@@ -24,6 +28,20 @@ exports. createProduct=(req,res)=>{
     products.push(req.body)
   
     res.json(req.body);
+  }
+
+
+  //POST using moongoose db
+  exports. createProduct=(req,res)=>{
+    
+    const product = new Product();//creating an instance of the Product constructor
+    product.title = 'PhoneX';
+    product.price = 9999;
+    product.rating = 5;
+    product.save((err, doc) => {//this is the way to save the data in mongodb via code...
+        console.log(err, doc);
+        res.json(doc);
+    });
   }
 
   // PUT operation - Update a product
